@@ -236,6 +236,12 @@ vim.o.breakindent = true
 -- Save undo history
 vim.o.undofile = true
 
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+
 -- Case-insensitive searching UNLESS \C or capital in search
 vim.o.ignorecase = true
 vim.o.smartcase = true
@@ -250,7 +256,7 @@ vim.o.timeoutlen = 300
 
 -- Line below cursor when scrolling
 vim.o.scrolloff = 8
-vim.o.sidescrolloff = 5
+vim.o.sidescrolloff = 8
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -441,7 +447,21 @@ end
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
   -- clangd = {},
-  gopls = {},
+  gopls = {
+    settings = {
+      gopls = {
+        analyses = {
+          nilness = true,
+          unusedparams = true,
+          unusedwrite = true,
+          useany = true,
+        },
+        gofumpt = true,
+        staticcheck = true,
+        usePlaceholders = true,
+      },
+    },
+  },
   -- pyright = {},
   rust_analyzer = {},
   -- tsserver = {},
